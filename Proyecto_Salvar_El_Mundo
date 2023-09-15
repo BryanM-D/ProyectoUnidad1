@@ -13,8 +13,7 @@ import java.util.Scanner;
 
 public class Tortugas1 {
     //Base de Datos de tortuga encontrada anteriormente, con el ingreso de datos se ira alimentando esta informacion ingresada 
-    //en el codigo manualmente y ya luego con la opcion 2 podemos ver las tortugas encontradas y a medidad que ingresen datos
-   // ella nos vaya calculando algunos datos estadisticos relevantes.
+    //en el codigo manualmente
     
     static Scanner scanner = new Scanner(System.in);
     static String[] especies = {"Laúd", "Verde", "Boba", "Carey", "Olivácea", "De Kemp", "De Espalda Plana"};
@@ -55,10 +54,12 @@ public class Tortugas1 {
     }
 
     static void ingresarTortugaEncontrada() {
-        System.out.print("Especie de la tortuga encontrada: ");
+        System.out.print("Especie de la tortuga encontrada ");
+        System.out.print("Sino sabe el dato, indique una descripcion: ");
         String nuevaEspecie = scanner.nextLine();
 
-        System.out.print("Cantidad de huevos de la tortuga encontrada: ");
+        System.out.print("Cantidad de huevos de la tortuga encontrada ");
+        System.out.print("(No toque los huevos:) ");
         int nuevosHuevos = scanner.nextInt();
         scanner.nextLine();  
 
@@ -77,7 +78,7 @@ public class Tortugas1 {
         System.out.print("Lugar donde se encontro: ");
         String nuevoLugar = scanner.nextLine();
 
-        // ****Agregar los nuevos datos a los arreglos****
+        // Agregar los nuevos datos a los arreglos
         especies = Arrays.copyOf(especies, especies.length + 1);
         cantidadHuevos = Arrays.copyOf(cantidadHuevos, cantidadHuevos.length + 1);
         huevosEclosionados = Arrays.copyOf(huevosEclosionados, huevosEclosionados.length + 1);
@@ -108,58 +109,41 @@ public class Tortugas1 {
             System.out.println("Es de agua salada: " + esAguaSalada[i]);
             System.out.println("Lugar: " + Lugar[i]);
             System.out.println();
+            
         }
         
        
 
 
-        // ****Calcular promedio de huevos****
+        // Calcular promedio de huevos
         int totalHuevos = sumarArray(cantidadHuevos);
         double promedioHuevos = (double) totalHuevos / cantidadHuevos.length;
 
-        // *****Calcular media de huevos eclosionados*****
+        // Calcular media de huevos eclosionados
         int totalEclosionados = sumarArray(huevosEclosionados);
         double mediaHuevosEclosionados = (double) totalEclosionados / huevosEclosionados.length;
 
-        //***** Calcular mediana de tortugas que sobreviven****
+        // Calcular mediana de tortugas que sobreviven
         Arrays.sort(cantidadHuevos);
         int medianaTortugasquelleganalmar = cantidadHuevos[cantidadHuevos.length / 2];
         
-        // ****Calcular cantidad de sobrevivientes****
+        // Calcular cantidad de sobrevivientes
         double  cantidadSobrevivientes = (double) cantidadHuevos.length / 3;
 
-        // ****Calcular porcentaje de machos que se pueden salvar****
-        double cantidadMachos =  (double) (cantidadHuevos.length * (1 - porcentajeHembras[0])); // Suponemos que el porcentaje de machos es el mismo para todas las especies
-        double  cantidadMachosSalvados = (double)  (cantidadMachos / 100);
+    
 
-        // ******Encontrar especie moda****
+        // Encontrar especie moda
         String especieModa = encontrarModa(especies);
         
-         // *****Calcular porcentaje de machos que se pueden salvar, teniendo en cuenta el habitat****
-        double porcentajeMachosSalvados;
-        int contadorMachosAguaSalada = 0;
-        int contadorMachosAguaDulce = 0;
-
-        for (int i = 0; i < cantidadHuevos.length; i++) {
-            if (esAguaSalada[i]) {
-                contadorMachosAguaSalada += cantidadHuevos[i] * (1 - porcentajeHembras[i]);
-            } else {
-                contadorMachosAguaDulce += cantidadHuevos[i] * (1 - porcentajeHembras[i]);
-            }
-        }
-
-       porcentajeMachosSalvados = (double)  (contadorMachosAguaSalada + contadorMachosAguaDulce) / (contadorMachosAguaSalada + contadorMachosAguaDulce + totalHuevos) * 100;
-
-        
-
+   
+        System.out.println("*********RESUMEN*****");
         System.out.println("Datos generales sobre las  tortugas .");  
         System.out.println("Promedio de Huevos: " + promedioHuevos);
         System.out.println("Media de Huevos Eclosionados: " + mediaHuevosEclosionados);
         System.out.println("Mediana de Tortugas que llegan al mar: " + medianaTortugasquelleganalmar);
         System.out.println("Cantidad de Sobrevivientes: " + cantidadSobrevivientes);
-        System.out.println("Porcentaje de Machos Salvados: " + ((double) cantidadMachosSalvados / cantidadMachos * 100) + "%");
         System.out.println("Especie Moda: " + especieModa);
-        
+        System.out.println();
         
         
     }
@@ -200,11 +184,7 @@ public class Tortugas1 {
      
              }
                 
-        if (conteo > maxConteo) {
-            moda = arr[arr.length - 1];
-        }
-
-        return moda;
-    }
-}
+    
+    
+    
 
